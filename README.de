@@ -1,0 +1,155 @@
+Red Hat Linux/x86 9 (Shrike)
+====================================
+
+Die Inhalte dieser CD-ROM sind Copyright (C) 1995-2003 von Red Hat, Inc. und 
+anderen. Die einzelnen Copyrights für die Bezeichnungen der Distribution finden
+Sie auf jedem Sourcepaket. Die Distributionsbezeichnung der Tools, die 
+urheberrechtlich für Red Hat, Inc. geschützt sind, finden Sie in der Datei 
+EULA.
+
+Red Hat und RPM sind Warenzeichen von Red Hat, Inc.
+
+============================================================================
+VERZEICHNISAUFBAU
+
+Red Hat Linux wird auf sechs CD-ROMS ausgeliefert (CD 1 bis CD 6).
+CD 1 kann direkt in die Installation der meisten modernen Systeme 
+gebootet werden, und enthält die folgende Verzeichnisstruktur 
+(wobei /mnt/cdrom der Mount-Punkt der CD-ROM ist):
+
+/mnt/redhat
+  |----> RedHat
+  |        |----> RPMS         -- Binärpakete
+  |        `----> base         -- Informationen über diese Version von Red Hat
+  |                               Linux - werden beim Installationsprozess 
+  |                               verwendet
+  |----> images                -- Boot- und Treiberdisketten-Image
+  |----> dosutils              -- Installations-Dienstprogramme für DOS
+  |----> README                -- diese Datei
+  |----> RELEASE-NOTES         -- die neuesten Informationen dieser Version von
+  |                               Red Hat Linux
+  `----> RPM-GPG-KEY           -- GPG Signatur für Pakete von Red Hat
+
+CDROM 2 und 3 ist ähnlich, mit der Ausnahme, dass nur das RedHat Unterverzeichnis vorhanden ist.
+
+Die Verzeichnisstruktur der CD 4, 5 und 6 ist wie folgt:
+
+/mnt/cdrom
+  |----> SRPMS                 -- Sourcepakete
+  `----> RPM-GPG-KEY           -- GPG Signatur für Pakete von Red Hat
+
+Wenn Sie einen Installationsbaum für NFS, FTP oder HTTP-Installationen einstellen,  
+müssen Sie die Dateien mit den Infos zur Version und sämtliche Dateien aus dem
+RedHat-Verzeichnis von CDROM 1-3 kopieren. Auf Linux und Unix Systemen wird 
+/target/directory Ihres Servers mit folgendem Prozess korrekt konfiguriert
+(der für jede CDROM auszuführen ist):
+
+    1) CDROM einlegen 
+    2) mount /mnt/cdrom
+    3) cp -a /mnt/cdrom/RedHat /target/directory
+    4) cp /mnt/cdrom/RELEASE-NOTES* /target/directory
+    5) umount /mnt/cdrom
+
+Red Hat Linux ist auch als bootfähige DVD-ROM für kompatible
+Systeme erhältlich.Die DVD-ROM enthält alle Installationsdateien 
+und Binaries (der Inhalt der CD-ROMs 1, 2 und 3) und außerdem 
+Quell-RPMs (CDs 4, 5 und 6), und hat die folgende
+Verzeichnisstruktur (wobei /mnt/cdrom der Mount-Punkt der DVD-ROM ist):
+
+/mnt/cdrom
+  |----> RedHat
+  |        |----> RPMS         -- Binärpakete
+  |        `----> base         -- Informationen über diese Version von 
+                                  Red Hat Linux - werden beim 
+                                  Installationsprozess verwendet
+  |                               
+  |----> SRPMS                 -- Sourcepakete
+  |----> images                -- Boot- und Treiberdisketten-Image
+  |----> dosutils              -- Installations-Dienstprogramme für DOS
+  |----> README                -- diese Datei
+  |----> RELEASE-NOTES         -- die neuesten Informationen über diese  i386:   |                               Version von Red Hat Linux
+  `----> RPM-GPG-KEY           -- GPG Signatur für Pakete von Red Hat
+
+============================================================================
+INSTALLIEREN
+
+Viele Computer können nun automatisch von CD-ROM booten. Wenn Sie so 
+einen Computer besitzen (und dieser richtig konfiguriert ist), können 
+Sie die Red Hat Linux CD-ROM direkt ohne Bootdisketten booten.  Nach dem
+Booten startet das Red Hat Linux Installationsprogramm, und Sie können dann
+Ihr System von CD-ROM installieren.
+
+
+Wenn ihr Computer eine Bootdiskette für das Starten des Red Hat 
+Linux Installationsprozesses benötigt, brauchen Sie eine oder 
+mehrere Image-Dateien zum Erstellen der nötigen Disketten. Diese 
+Dateien befinden sich im Image-Verzeichnis. Dieses Verzeichnis 
+enthält die folgenden Image-Dateien:
+
+
+       - bootdisk.img - Image-Datei für die primäre Bootdiskette
+
+       - drvblock.img - Image-Datei mit zusätzlichen
+                        Blockgeräte-Treibern
+
+    - drvnet.img - Image-Datei mit zusätzlichen Netzwerk-Treibern
+
+    - pcmciadd.img - Image-Datei für PCMCIA-Treiber
+
+Eine Diskette, die aus der bootdisk.img-Datei erstellt wurde, 
+wird zum Booten aller Installationen verwendet, unabhängig von 
+der gewählten Installationsmethode.
+
+Zusätzlich dazu benötigen Sie, wenn Sie etwas anderes als eine 
+Installation von CD-ROM oder Festplatte mit ausschließlich
+IDE/ATAPI-Geräten durchführen wollen, eine oder mehrere
+Treiberdisketten  mit einer oder mehrerer Image-Dateien für 
+Treiberdisketten.
+
+Eine aus der Datei drvblock.img erstellte Diskette wird benötigt, 
+wenn das System nicht-IDE Speichergeräte (wie zum Beispiel eine
+SCSI-Platte oder CD-ROM-Laufwerke) besitzt, die während der 
+Installation verwendet werden sollen.
+
+Eine aus der Datei drvnet.img erstellte Diskette wird benötigt, 
+wenn eine netzwerkbasierte Installation durchgeführt werden 
+soll.
+
+Eine aus der Datei pcmciadd.img erstellte Diskette wird benötigt, 
+wenn PCMCIA-Geräte (wie zum Beispiel ein PCMCIA-basiertes
+CD-ROM-Laufwerk oder ein Netzwerkadapter) während der
+Installation verwendet werden sollen.
+
+Um eines dieser Images auf Diskette zu schreiben, verwenden Sie 
+entweder das Programm rawrite im dosutils-Verzeichnis oder 'dd' 
+in einem Linux-ähnlichen System. Diese Programme übertragen den 
+Inhalt der Image-Datei auf eine Diskette. Sobald die benötigten 
+Disketten erstellt wurden, legen Sie die Boot-Diskette ein und 
+booten Sie Ihren Computer.
+
+Desweiteren befindet sich im Verzeichnis images/ die Datei
+boot.iso. Diese Datei ist ein ISO-Image, das in das Red Hat Linux 
+Installationsprogramm gebootet werden kann. Dies ist eine
+einfache Methode, netzwerkbasierte Installationen ohne eine 
+Vielzahl von Disketten zu starten. Um boot.iso verwenden zu 
+können, muss Ihr Computer vom CD-ROM-Laufwerk booten können und 
+das BIOS muss dafür konfiguriert sein.Sie müssen dann die Datei 
+boot.iso auf eine beschreibbare CD-ROM brennen.
+
+============================================================================
+HILFE ANFORDERN
+
+Zugriff über das Web http://www.redhat.com. Im Speziellen, Zugriff auf unsere
+Mailing Lists unter:
+
+                    http://www.redhat.com/mailing-lists
+
+Wenn Sie keinen Zugriff zum Web haben, können Sie die Mailing List abonnieren.
+
+zum Abonnieren Schicken Sie eine Mail an  Shrike-list-request@redhat.
+com, und geben Sie als Betreff
+
+                                 subscribe
+
+ein. Sie brauchen keinen weiteren Text einzugeben.
+
